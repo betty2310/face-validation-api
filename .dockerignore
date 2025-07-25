@@ -1,0 +1,18 @@
+# Git
+.git
+.gitignore
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Docker
+.dockerignore
+Dockerfile
+
+face.tar
+face.zip
+face.tar.gz
