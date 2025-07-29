@@ -69,6 +69,18 @@ def validate_and_crop(request: ImageRequest):
 
     img_height, img_width, _ = image.shape
     img_area = img_width * img_height
+    
+    if(img_height == 0 or img_width == 0):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"message": "Ảnh không hợp lệ"}
+        )
+        
+    if(img_height < 500 or img_width < 500):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"message": "Ảnh quá nhỏ. Vui lòng cung cấp ảnh có kích thước tối thiểu 500x500."}
+        )
 
     blob = cv2.dnn.blobFromImage(
         cv2.resize(image, (300, 300)), 1.0, (300, 300), (104.0, 177.0, 123.0)
